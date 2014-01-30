@@ -12,3 +12,7 @@ bower init
 npm install grunt grunt-contrib-watch grunt-contrib-connect load-grunt-tasks grunt-contrib-copy grunt-bower-task grunt-bower-install grunt-text-replace  grunt-contrib-stylus  grunt-contrib-jade  connect-livereload grunt-contrib-coffee grunt-open --save-dev
 git add -A
 git commit -a -m"initial local commit"
+grunt copy-bower
+grunt install-bower
+grunt
+
