@@ -11,7 +11,7 @@ var lrSnippet = require('connect-livereload')({
   port: LIVERELOAD_PORT
 });
 // All the middleware necessary to serve static files.
-var livereloadMiddleware = function(connect, options) {
+var livereloadMiddleware = function (connect, options) {
   return [
     // Inject a livereloading script into static files.
     lrSnippet,
@@ -25,12 +25,11 @@ var livereloadMiddleware = function(connect, options) {
 
 
 /*global module:false*/
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   // load all grunt tasks matching the `grunt-*` pattern
   require('load-grunt-tasks')(grunt);
   // Project configuration.
   grunt.initConfig({
-
     bower: {
       install: {
         options: {
@@ -44,10 +43,7 @@ module.exports = function(grunt) {
         }
       }
     },
-
-
     'bower-install': {
-
       target: {
 
         // Point to the files that should be updated when
@@ -88,52 +84,62 @@ module.exports = function(grunt) {
         // fileTypes: {}
       }
     },
+
+    coffee: {
+      compile: {
+        files: {
+          'src/assets/js/main.js': 'src/assets/coffee/main.coffee' // 1:1 compile
+          // 'path/to/another.js': ['path/to/sources/*.coffee',
+          // 'path/to/more/*.coffee'] // compile and concat into single file
+        }
+      }
+    },
+
     /**
      * This replaces the font location within the uikit min css
      * @type {Object}
      */
-    // replace: {
-    //   'replace-bower-copy': {
-    //     overwrite: true,
-    //     src: ['src/assets/bower_components/uikit/uikit.min.css'], // source files array (supports minimatch)
-    //     replacements: [{
-    //       from: /\.\.\/fonts\//g,
-    //       to: ''
-    //     }]
-    //   },
-    //   'replace-bower-install': {
-    //     overwrite: true,
-    //     src: ['src/assets/jade/*.jade'], // source files array (supports minimatch)
-    //     // dest: 'src/', // destination directory or file
-    //     replacements: [{
+    replace: {
+      'replace-bower-copy': {
+        overwrite: true,
+        src: ['src/assets/bower_components/uikit/uikit.min.css'], // source files array (supports minimatch)
+        replacements: [{
+          from: /\.\.\/fonts\//g,
+          to: ''
+        }]
+      },
+      'replace-bower-install': {
+        overwrite: true,
+        src: ['src/assets/jade/*.jade'], // source files array (supports minimatch)
+        // dest: 'src/', // destination directory or file
+        replacements: [{
 
-    //       from: /dist\/css\/|dist\/js\/|dist\//g, // regex replacement ('Fooo' to 'Mooo')
-    //       to: ''
+          from: /dist\/css\/|dist\/js\/|dist\//g, // regex replacement ('Fooo' to 'Mooo')
+          to: ''
 
-    //     }]
-    //   }
-    // },
-    // stylus: {
-    //   compile: {
-    //     options: {
-    //       // paths: ['path/to/import', 'another/to/import'],
-    //       // urlfunc: 'embedurl', // use embedurl('test.png') in our code to trigger Data URI embedding
-    //       // use: [
-    //       //   require('fluidity') // use stylus plugin at compile time
-    //       // ],
-    //       // import: [ //  @import 'foo', 'bar/moo', etc. into every .styl file
-    //       //   'foo', //  that is compiled. These might be findable based on values you gave
-    //       //   'bar/moo' //  to `paths`, or a plugin you added under `use`
-    //       // ]
-    //     },
-    //     files: {
-    //       'src/assets/css/viewer.css': 'src/assets/styl/viewer.styl', // 1:1 compile
-    //       'src/assets/css/press.css': 'src/assets/styl/press.styl' // 1:1 compile
+        }]
+      }
+    },
+    stylus: {
+      compile: {
+        options: {
+          // paths: ['path/to/import', 'another/to/import'],
+          // urlfunc: 'embedurl', // use embedurl('test.png') in our code to trigger Data URI embedding
+          // use: [
+          //   require('fluidity') // use stylus plugin at compile time
+          // ],
+          // import: [ //  @import 'foo', 'bar/moo', etc. into every .styl file
+          //   'foo', //  that is compiled. These might be findable based on values you gave
+          //   'bar/moo' //  to `paths`, or a plugin you added under `use`
+          // ]
+        },
+        files: {
+          'src/assets/css/main.css': 'src/assets/styl/main.styl', // 1:1 compile
 
-    //       // 'path/to/another.css': ['path/to/sources/*.styl', 'path/to/more/*.styl'] // compile and concat into single file
-    //     }
-    //   }
-    // },
+          // 'path/to/another.css': ['path/to/sources/*.styl', 'path/to/more/*.styl'] // compile and concat into single file
+        }
+      }
+    },
 
     jade: {
       compile: {
@@ -173,12 +179,12 @@ module.exports = function(grunt) {
       client: {
         // '**' is used to include all subdirectories
         // and subdirectories of subdirectories, and so on, recursively.
-        files: ['src/assets/styl/*', 'src/assets/jade/*.jade', 'src/assets/js/*', '!**/bower_components/**'],
+        files: ['src/assets/styl/*', 'src/assets/jade/*.jade', 'src/assets/coffee/*', '!**/bower_components/**'],
         // In our case, we don't configure any additional tasks,
         // since livereload is built into the watch task,
         // and since the browser refresh is handled by the snippet.
         // Any other tasks to run (e.g. compile CoffeeScript) go here:
-        tasks: ['jade', 'stylus'],
+        tasks: ['jade', 'stylus', 'coffee'],
         options: {
           livereload: LIVERELOAD_PORT
         }
@@ -210,7 +216,7 @@ module.exports = function(grunt) {
 
   // grunt.registerTask('serve', ['connect:server', 'watch:client']);
 
-  grunt.registerTask('server', function() {
+  grunt.registerTask('server', function () {
     grunt.task.run([
       'jade',
       'stylus',

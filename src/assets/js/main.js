@@ -1,8 +1,6 @@
+(function() {
+  jQuery(document).ready($)(function() {
+    return console.log("Document ready");
+  });
 
-jQuery(document).ready(function($) {
-      console.log('ready');
-
-
-
-});
-
+}).call(this);

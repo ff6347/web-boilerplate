@@ -1,17 +1,48 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>has homepage</title>
-<!-- bower:css -->
-<!-- endbower -->
-<link rel="stylesheet" type="text/css" href="assets/css/main.js">
-</head>
-<body>
-<div id="target"></div>
-
-<!-- bower:js -->
-<script src="bower_components/jquery/jquery.js"></script>
-<!-- endbower -->
-<script type="text/javascript" src="assets/js/main.js"></script>
-</body>
+<!-- jade template-->
+<!-- written by @author fabiantheblind-->
+<html lang="de">
+  <!-- this way you can set some variables-->
+  <head>
+    <title>'Home'</title>
+    <meta name="description" content="Some web boilerplate"><!-- bower:css -->
+    <link type="text/css" rel="stylesheet" href="assets/bower_components/uikit/uikit.min.css" />
+    <!-- endbower -->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div id="nav" class="uk-offcanvas">
+      <div class="uk-offcanvas-bar">
+        <form class="uk-search">
+          <input type="search" placeholder="search..." class="uk-search-field">
+          <button type="reset" class="uk-search-close"></button>
+        </form>
+        <ul class="uk-nav">
+          <li><a href="/">Home</a></li>
+          <li class="uk-active"><a href="#">Somemore</a></li>
+          <li><a href="#">Something else</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="uk-container uk-container-center">
+      <div class="uk-grid">
+        <div class="uk-width-1-1">
+          <button type="button" data-uk-offcanvas="{target:'#nav'}" class="uk-button">Menu</button>
+          <div class="uk-grid uk-container-center">
+            <div class="uk-width-1-1">
+              <div id="something">
+                <h1>Hello World!</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- bower:js -->
+    <script type="text/javascript" src="assets/bower_components/jquery/jquery.js"></script>
+    <script type="text/javascript" src="assets/bower_components/uikit/uikit.min.js"></script>
+    <!-- endbower -->
+    <br />
+    <script type="text/javascript" src="assets/js/main.js"></script>
+  </body>
 </html>

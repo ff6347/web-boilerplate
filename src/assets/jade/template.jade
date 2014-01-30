@@ -2,19 +2,38 @@ doctype html
 // jade template
 // written by @author fabiantheblind
 html(lang='de')
+  block vars
   head
     title '#{title}'
     meta(name='description', content='#{description}')
     <!-- bower:css -->
+    <link type="text/css" rel="stylesheet" href="assets/bower_components/uikit/uikit.min.css" />
     <!-- endbower -->
     block append css
       // css block
   body
-    div#wrapper
-      block append content
-        // content block in template
-    <br />
+    div#nav.uk-offcanvas
+      .uk-offcanvas-bar
+        form.uk-search
+          input.uk-search-field(type='search', placeholder='search...')
+          button.uk-search-close(type='reset')
+        ul.uk-nav
+          li
+            a(href='/') Home
+          li.uk-active
+            a(href='#') Somemore
+          li
+            a(href='#') Something else
+    div.uk-container.uk-container-center
+      .uk-grid
+        .uk-width-1-1
+          button.uk-button(type='button', data-uk-offcanvas='{target:\'#nav\'}') Menu
+          block append content
+            // content block append in template
+
     <!-- bower:js -->
+    <script type="text/javascript" src="assets/bower_components/jquery/jquery.js"></script>
+    <script type="text/javascript" src="assets/bower_components/uikit/uikit.min.js"></script>
     <!-- endbower -->
     <br />
     block append scripts
