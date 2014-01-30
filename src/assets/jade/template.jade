@@ -1,0 +1,21 @@
+doctype html
+// jade template
+// written by @author fabiantheblind
+html(lang='de')
+  head
+    title '#{title}'
+    meta(name='description', content='#{description}')
+    <!-- bower:css -->
+    <!-- endbower -->
+    block append css
+      // css block
+  body
+    div#wrapper
+      block append content
+        // content block in template
+    <br />
+    <!-- bower:js -->
+    <!-- endbower -->
+    <br />
+    block append scripts
+      // scripts block
