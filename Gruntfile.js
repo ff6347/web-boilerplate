@@ -30,6 +30,15 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   // Project configuration.
   grunt.initConfig({
+
+      notify: {
+    "open-note": {
+      options: {
+           title: 'Task Complete',  // optional
+        message: 'Open', //required
+    },
+  },
+},
     bower: {
       install: {
         options: {
@@ -192,6 +201,7 @@ module.exports = function (grunt) {
     },
     open: {
       server: {
+
         url: 'http://localhost:<%= connect.client.options.port %>'
       }
     }
@@ -222,6 +232,7 @@ module.exports = function (grunt) {
       'stylus',
       'connect:client',
       'open',
+      'notify:open-note',
       'watch:client'
     ]);
   });
